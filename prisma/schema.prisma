@@ -12,75 +12,11 @@ datasource db {
 
 enum Role {
   ADMIN
-  TEACHER
-  STUDENT
+  USER
 }
 
-model Students {
-  id        Int      @id @default(autoincrement())
-  name      String
-  surname   String
-  email     String   @unique
-  password  String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+model User {
+  id  Int @unique
+  
 
-  bookIssues BookIssues[]
-  fines Fines[]
-}
-
-model Faculty {
-  id        Int      @id @default(autoincrement())
-  name      String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  books Books[]
-}
-
-model Books {
-  id        Int      @id @default(autoincrement())
-  name      String
-  author    String
-
-  faculty   Faculty  @relation(fields: [facultyId], references: [id])
-  facultyId Int
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  authors Authors[]
-  bookIssues BookIssues[]
-}
-
-model Authors {
-  id        Int      @id @default(autoincrement())
-  name      String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  books Books[]
-}
-
-model BookIssues {
-  id        Int      @id @default(autoincrement())
-
-  student   Students @relation(fields: [studentId], references: [id])
-  studentId Int
-  book      Books    @relation(fields: [bookId], references: [id])
-  bookId    Int
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-}
-
-model Fines {
-  id        Int      @id @default(autoincrement())
-
-  student   Students @relation(fields: [studentId], references: [id])
-  studentId Int
-
-  amount    Int
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
 }

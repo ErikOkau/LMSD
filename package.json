@@ -14,5 +14,8 @@
     "prisma": "^5.8.1",
     "vue": "^3.4.10",
     "vue-router": "^4.2.5"
+  },
+  "dependencies": {
+    "tsx": "^4.7.0"
   }
 }
