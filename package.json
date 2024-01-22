@@ -10,8 +10,9 @@
     "postinstall": "nuxt prepare"
   },
   "devDependencies": {
-    "nuxt": "^3.9.1",
+    "nuxt": "^3.8.2",
     "prisma": "^5.8.1",
+    "sass": "^1.70.0",
     "vue": "^3.4.10",
     "vue-router": "^4.2.5"
   },

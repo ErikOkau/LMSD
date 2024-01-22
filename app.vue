@@ -3,7 +3,9 @@
 </script>
 <template>
     <NuxtLayout>
+        <Nav />
        		<NuxtPage></NuxtPage>
+        <Footer />
     </NuxtLayout>
 </template>
 
