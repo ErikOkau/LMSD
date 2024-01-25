@@ -2,19 +2,21 @@
 
 const modeShift = ref(false)
 
-const modeShiftHandler = () => {
+const modeShiftHandler = (e: any) => {
     modeShift.value = !modeShift.value
 
     if (modeShift.value) {
+        e.target.setAttribute('src', '/img/dark_mode.svg')
         document.documentElement.style.setProperty('--darkest', '#fff')
         document.documentElement.style.setProperty('--dark', '#000')
         document.documentElement.style.setProperty('--light', '#000')
     } else {
+        e.target.setAttribute('src', '/img/light_mode.svg')
         document.documentElement.style.setProperty('--darkest', '#162946')
-        document.documentElement.style.setProperty('--dark', '#284368')
         document.documentElement.style.setProperty('--light', '#fff')
+        document.documentElement.style.setProperty('--dark', '#284368')
     }
-}
+    }
 
 </script>
 
@@ -29,8 +31,7 @@ const modeShiftHandler = () => {
         </div>
         <div class="right_navbar">
             <NuxtLink class="Login" to="/">Log in</NuxtLink>
-            <img src="/img/light_mode.svg" alt="light_mode" @click="modeShiftHandler" v-if="!modeShift">
-            <img src="/img/dark_mode.svg" alt="dark_mode" @click="modeShiftHandler" v-else>
+            <img src="/img/light_mode.svg" alt="light_mode" @click="modeShiftHandler" :data="modeShift">
 
             <div class="languageSelect_dropdown">
                 <select name="languageSelect" id="languageSelect">
@@ -43,6 +44,7 @@ const modeShiftHandler = () => {
 </template>
 
 <style scoped lang="scss">
+
 nav {
     display: flex;
     justify-content: space-between;
@@ -74,7 +76,7 @@ nav {
 
                 &:hover {
                     cursor: pointer;
-                    color: var(--light);    
+                    color: var(--light);
                     background-color: var(--dark);
                 }
             }
