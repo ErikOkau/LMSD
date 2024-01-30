@@ -17,6 +17,10 @@
     "vue-router": "^4.2.5"
   },
   "dependencies": {
+    "@varandas/steam": "^2.0.0",
+    "dotenv": "^16.4.1",
+    "openid-client": "^5.6.4",
+    "steam-api-sdk": "^1.4.1",
     "tsx": "^4.7.0"
   }
 }
