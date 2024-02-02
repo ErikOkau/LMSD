@@ -2,22 +2,34 @@
 
 const modeShift = ref(false)
 
-const modeShiftHandler = (e: any) => {
+const img = ref('/img/light_mode.svg')
+const darkest = ref('#162946')
+const dark = ref('#284368')
+const light = ref('#fff')
+
+
+function modeShiftHandler(e: any) {
     modeShift.value = !modeShift.value
 
     if (modeShift.value) {
-        e.target.setAttribute('src', '/img/dark_mode.svg')
-        document.documentElement.style.setProperty('--darkest', '#fff')
-        document.documentElement.style.setProperty('--dark', '#000')
-        document.documentElement.style.setProperty('--light', '#000')
+        img.value = '/img/dark_mode.svg'
+        darkest.value = '#fff'
+        dark.value = '#162946'
+        light.value = '#000'
     } else {
-        e.target.setAttribute('src', '/img/light_mode.svg')
-        document.documentElement.style.setProperty('--darkest', '#162946')
-        document.documentElement.style.setProperty('--light', '#fff')
-        document.documentElement.style.setProperty('--dark', '#284368')
+        img.value = '/img/light_mode.svg'
+        darkest.value = '#162946'
+        dark.value = '#284368'
+        light.value = '#fff'
     }
-    }
-
+}   
+onMounted(() => {
+    watchEffect(() => {
+        document.documentElement.style.setProperty('--darkest', darkest.value)
+        document.documentElement.style.setProperty('--dark', dark.value)
+        document.documentElement.style.setProperty('--light', light.value)
+    })
+})
 </script>
 
 <template>
@@ -27,24 +39,22 @@ const modeShiftHandler = (e: any) => {
             <div class="navigation_links">
                 <NuxtLink to="/">Profiles</NuxtLink>
                 <NuxtLink to="/">Leaderboards</NuxtLink>
-            </div>
+            </div> 
         </div>
         <div class="right_navbar">
             <NuxtLink class="Login" to="/login">Log in</NuxtLink>
-            <img src="/img/light_mode.svg" alt="light_mode" @click="modeShiftHandler" :data="modeShift">
-
-            <div class="languageSelect_dropdown">
-                <select name="languageSelect" id="languageSelect">
-                    <option value="english">English</option>
-                    <option value="norwegian">Norwegian</option>
-                </select>
-            </div>
+            <img :src="img" alt="light_mode" @click="modeShiftHandler" :data="modeShift">    
+        </div>
+        <div class="languageSelect_dropdown">
+            <select name="languageSelect" id="languageSelect">
+                <option class="lang" value="english">English</option>
+                <option class="lang" value="norwegian">Norwegian</option>
+            </select>
         </div>
     </nav>
 </template>
 
 <style scoped lang="scss">
-
 nav {
     display: flex;
     justify-content: space-between;
@@ -135,15 +145,7 @@ nav {
             color: white;
             border: none;
             transition: all 0.3s ease-in-out;
-            border-radius: none;
-
-            option {
-                width: 100%;
-                border-radius: none;
-                background-color: var(--dark);
-                color: white;
-            }
-
+        
             &:hover {
                 cursor: pointer;
                 background-color: var(--dark);
