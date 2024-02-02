@@ -30,7 +30,7 @@ const modeShiftHandler = (e: any) => {
             </div>
         </div>
         <div class="right_navbar">
-            <NuxtLink class="Login" to="/">Log in</NuxtLink>
+            <NuxtLink class="Login" to="/login">Log in</NuxtLink>
             <img src="/img/light_mode.svg" alt="light_mode" @click="modeShiftHandler" :data="modeShift">
 
             <div class="languageSelect_dropdown">
