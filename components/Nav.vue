@@ -18,7 +18,7 @@ function modeShiftHandler(e: any) {
         light.value = '#000'
     } else {
         img.value = '/img/light_mode.svg'
-        darkest.value = '#162946'
+        darkest.value = '#fff'
         dark.value = '#284368'
         light.value = '#fff'
     }
@@ -44,13 +44,15 @@ onMounted(() => {
         <div class="right_navbar">
             <NuxtLink class="Login" to="/login">Log in</NuxtLink>
             <img :src="img" alt="light_mode" @click="modeShiftHandler" :data="modeShift">    
+
+            <div class="languageSelect_dropdown">
+                <select name="languageSelect" id="languageSelect">
+                    <option class="lang" value="english">English</option>
+                    <option class="lang" value="norwegian">Norwegian</option>
+                </select>
+            </div>
         </div>
-        <div class="languageSelect_dropdown">
-            <select name="languageSelect" id="languageSelect">
-                <option class="lang" value="english">English</option>
-                <option class="lang" value="norwegian">Norwegian</option>
-            </select>
-        </div>
+      
     </nav>
 </template>
 
