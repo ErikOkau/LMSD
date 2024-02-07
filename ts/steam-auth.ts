@@ -13,7 +13,6 @@ export const steamApi = new SteamApi(apiKey as string)
 console.log(`API Key: ${apiKey}`);
 
 
-
 // Get the news service from the client
 export const newsService = steamApi.getNewsService()
 

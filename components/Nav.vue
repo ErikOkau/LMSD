@@ -6,6 +6,7 @@ const img = ref('/img/light_mode.svg')
 const darkest = ref('#162946')
 const dark = ref('#284368')
 const light = ref('#fff')
+const cyan = ref('#4ca1af')
 
 
 function modeShiftHandler(e: any) {
@@ -14,13 +15,15 @@ function modeShiftHandler(e: any) {
     if (modeShift.value) {
         img.value = '/img/dark_mode.svg'
         darkest.value = '#fff'
-        dark.value = '#162946'
+        dark.value = '#000'
         light.value = '#000'
+        cyan.value = '#162946'
     } else {
         img.value = '/img/light_mode.svg'
-        darkest.value = '#fff'
+        darkest.value = '#162946'
         dark.value = '#284368'
         light.value = '#fff'
+        cyan.value = '#4ca1af'
     }
 }   
 onMounted(() => {
@@ -88,7 +91,7 @@ nav {
 
                 &:hover {
                     cursor: pointer;
-                    color: var(--light);
+                    color: white;
                     background-color: var(--dark);
                 }
             }
@@ -151,6 +154,10 @@ nav {
             &:hover {
                 cursor: pointer;
                 background-color: var(--dark);
+            }
+
+            &:focus {
+                outline: none;
             }
         }
     }

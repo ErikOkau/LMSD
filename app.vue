@@ -17,6 +17,7 @@
     --dark:#284368;
     --light:#fff;
     --black: #000;
+    --cyan: #4ca1af;
 }
 
 
