@@ -25,6 +25,14 @@ model User {
   steamAccount SteamAccountLinkedToUser?
 }
 
+model SteamUser {
+  id        Int      @id @default(autoincrement())
+  steamId   String   @unique
+  username  String
+  avatar    String
+  createdAt DateTime @default(now())
+}
+
 model SteamAccountLinkedToUser {
   id Int @id @default(autoincrement())
   steamId String
