@@ -23,6 +23,9 @@ const submitForm = () => {
     console.log(username.value, email.value, password.value);
 };
 
+const loginWithSteam = () => {
+    window.location.href = '/auth/steam';
+}
 
 </script>
 
@@ -46,6 +49,8 @@ const submitForm = () => {
                     <input type="password" id=password v-model=password required />
 
                     <button type=submit>Login</button>
+                    
+                    <SteamLogin />
                 </form>
             </div>
 
@@ -78,7 +83,7 @@ const submitForm = () => {
      justify-content: center;
      margin-top: 5rem;
      margin-left: 12rem;
-     
+
 
      .buttons {
          display: flex;
