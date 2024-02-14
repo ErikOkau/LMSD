@@ -1,0 +1,21 @@
+This is my project structure:
+assets
+components
+- Login.vue
+- SteamLogin.vue
+middleware
+pages
+- index.vue
+- login.vue
+prisma
+- schema.prisma
+public
+- img
+server
+- tsconfig.json
+services
+ts
+- interfaces.ts
+app.vue
+nuxt.config.ts
+tsconfig.json
