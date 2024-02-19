@@ -34,6 +34,7 @@
     "passport": "^0.7.0",
     "passport-steam": "^1.0.18",
     "steam-login": "^0.1.7",
+    "steam-session": "^1.7.2",
     "tsx": "^4.7.0"
   }
 }

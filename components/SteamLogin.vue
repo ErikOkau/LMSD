@@ -1,6 +1,6 @@
 <script setup lang="ts">
-const loginWithSteam = () => {
-  window.location.href = '/auth/steam';
+function loginWithSteam () {
+    
 }
 </script>
 
