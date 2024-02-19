@@ -24,7 +24,7 @@ const submitForm = () => {
 };
 
 const loginWithSteam = () => {
-    window.location.href = '/auth/steam';
+ 
 }
 
 </script>
