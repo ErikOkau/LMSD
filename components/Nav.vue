@@ -48,11 +48,8 @@ onMounted(() => {
             <NuxtLink class="Login" to="/login">Log in</NuxtLink>
             <img :src="img" alt="light_mode" @click="modeShiftHandler" :data="modeShift">    
 
-            <div class="languageSelect_dropdown">
-                <select name="languageSelect" id="languageSelect">
-                    <option class="lang" value="english">English</option>
-                    <option class="lang" value="norwegian">Norwegian</option>
-                </select>
+            <div class="steam_button">
+                <button>Log in with Steam</button>
             </div>
         </div>
       
@@ -143,21 +140,21 @@ nav {
             }
         }
 
-        select {
-            padding: 0.5rem;
-            border-radius: 10;
-            background-color: var(--dark);
-            color: white;
-            border: none;
-            transition: all 0.3s ease-in-out;
-        
-            &:hover {
-                cursor: pointer;
-                background-color: var(--dark);
-            }
+        .steam_button {
+            button {
+                padding: 0.5rem 1rem;
+                border-radius: 10;
+                background-color: var(--cyan);
+                color: var(--darkest);
+                transition: all 0.3s ease-in-out;
+                border: none;
+                color: var(--light);
 
-            &:focus {
-                outline: none;
+                &:hover {
+                    cursor: pointer;
+                    background-color: var(--dark);
+                    color: var(--light);
+                }
             }
         }
     }
