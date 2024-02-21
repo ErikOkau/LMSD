@@ -5,7 +5,7 @@
 <template>
 
     <Login />
-
+            
 </template>
 
 <style scoped lang="scss">
