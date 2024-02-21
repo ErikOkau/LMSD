@@ -4,7 +4,7 @@ import session from 'express-session';
 import passportSteam from 'passport-steam';
 import "dotenv/config";
 
-const SteamAPI = process.env.Steam_API_Key;
+const SteamAPI = process.env.Steam_API_Key
 
 const SteamStrategy = passportSteam.Strategy;
 const app = express();
@@ -17,17 +17,19 @@ passport.serializeUser((user, done) => {
 });
 
 passport.deserializeUser((user, done) => {
-	done(null, user);
+	done(null, user as Express.User);
 });
 
 // Initiate Strategy
 passport.use(new SteamStrategy({
 	returnURL: 'http://localhost:' + port + '/api/auth/steam/return',
 	realm: 'http://localhost:' + port + '/',
-	apiKey: SteamAPI
+	apiKey: SteamAPI as string 
 	}, function (identifier, profile, done) {
 		process.nextTick(function () {
-			profile.identifier = identifier;
+			console.log("nexTick prosses in server")
+			console.log(identifier)
+			/* profile.identifier = identifier; */
 			return done(null, profile);
 		});
 	}
@@ -44,6 +46,7 @@ app.use(session({
 
 app.use(passport.initialize());
 
+
 app.use(passport.session());
 
 // Initiate app
@@ -54,7 +57,6 @@ app.listen(port, () => {
 app.get('/', (req, res) => {
 	// SEND USER DATA TO YOUR DATA BASE HERE
 	res.send(req.user);
-	console.log(req.user)
 });
 
 // Routes
