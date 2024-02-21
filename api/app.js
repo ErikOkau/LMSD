@@ -2,6 +2,9 @@ import express from 'express';
 import passport from 'passport';
 import session from 'express-session';
 import passportSteam from 'passport-steam';
+import "dotenv/config";
+
+const SteamAPI = process.env.Steam_API_Key;
 
 const SteamStrategy = passportSteam.Strategy;
 const app = express();
@@ -21,7 +24,7 @@ passport.deserializeUser((user, done) => {
 passport.use(new SteamStrategy({
 	returnURL: 'http://localhost:' + port + '/api/auth/steam/return',
 	realm: 'http://localhost:' + port + '/',
-	apiKey: '00C67ACCD4AC21E7664C4BE8FE8F350D'
+	apiKey: SteamAPI
 	}, function (identifier, profile, done) {
 		process.nextTick(function () {
 			profile.identifier = identifier;
