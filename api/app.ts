@@ -45,8 +45,6 @@ app.use(session({
 }));
 
 app.use(passport.initialize());
-
-
 app.use(passport.session());
 
 // Initiate app
@@ -55,9 +53,10 @@ app.listen(port, () => {
 });
 
 app.get('/', (req, res) => {
-	// SEND USER DATA TO YOUR DATA BASE HERE
+	// Send user data to database here
 	res.send(req.user);
 });
+
 
 // Routes
 app.get('/api/auth/steam', passport.authenticate('steam', {failureRedirect: '/'}), function (req, res) {

@@ -10,7 +10,6 @@ function loginWithSteam() {
     <div class="Steam_login">
       <h1>Steam Login</h1>
       <img @click="loginWithSteam" src="https://steamcommunity-a.akamaihd.net/public/images/signinthroughsteam/sits_01.png" alt="Steam Login" target="_blank"/>
-      <NuxtLink to="/terms_of_use">Terms of use</NuxtLink>
     </div>
 </template>
 

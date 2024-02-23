@@ -51,6 +51,8 @@ const loginWithSteam = () => {
                     <button type=submit>Login</button>
                     
                     <SteamLogin />
+
+                    <NuxtLink class="terms_of_use" to="/terms_of_use">Terms of use</NuxtLink>
                 </form>
             </div>
 
@@ -142,6 +144,12 @@ const loginWithSteam = () => {
          form {
              display: flex;
              flex-direction: column;
+
+             .terms_of_use {
+                    color: var(--cyan);
+                    text-align: center;
+                    margin-top: 1rem;
+             }
 
              label {
                  color: white;
