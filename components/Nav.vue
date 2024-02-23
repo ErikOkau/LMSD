@@ -33,6 +33,18 @@ onMounted(() => {
         document.documentElement.style.setProperty('--light', light.value)
     })
 })
+
+function loginWithSteam() {
+        // Specify the URL and window properties
+        var url = "http://localhost:7069/api/auth/steam";
+        var windowName = "Steam Login";
+        var windowFeatures = "width=500,height=300,scrollbars=yes";
+
+        // Open the popup window
+        window.open(url, windowName, windowFeatures);
+}
+
+
 </script>
 
 <template>
@@ -45,11 +57,10 @@ onMounted(() => {
             </div> 
         </div>
         <div class="right_navbar">
-            <NuxtLink class="Login" to="/login">Log in</NuxtLink>
             <img :src="img" alt="light_mode" @click="modeShiftHandler" :data="modeShift">    
 
             <div class="steam_button">
-                <button>Log in with Steam</button>
+                <button @click="loginWithSteam">Log in with Steam</button>
             </div>
         </div>
       
@@ -111,20 +122,6 @@ nav {
         align-items: center;
         justify-content: center;
         gap: 0.1rem;
-
-        .Login {
-            color: var(--light);
-            padding: 0.5rem;
-            transition: all 0.3s ease-in-out;
-            border-radius: 10;
-            text-decoration: none;
-
-            &:hover {
-                cursor: pointer;
-                background-color: var(--dark);
-                color: #fff;
-            }
-        }
 
         img {
             width: 30px;

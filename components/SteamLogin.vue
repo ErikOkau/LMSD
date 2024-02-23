@@ -1,9 +1,15 @@
 <script setup lang="ts">
 
 function loginWithSteam() {
-    window.location.href = "http://localhost:7069/api/auth/steam";
+
+    const url = "http://localhost:7069/api/auth/steam";
+    window.open(url, 'Steam Login', 'width=1000,height=500,scrollbars=yes');
 }
 
+
+function openPopup() {
+
+}
 </script>
 
 <template>

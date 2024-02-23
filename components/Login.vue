@@ -19,13 +19,8 @@ const email = ref('');
 const password = ref('');
 
 const submitForm = () => {
-
     console.log(username.value, email.value, password.value);
 };
-
-const loginWithSteam = () => {
- 
-}
 
 </script>
 
@@ -78,13 +73,14 @@ const loginWithSteam = () => {
 </template>
 
 <style scoped lang="scss"> // Login/Register styling
+
  .container {
      display: flex;
      flex-direction: column;
      align-items: center;
      justify-content: center;
      margin-top: 5rem;
-     margin-left: 12rem;
+     margin-left: 5rem;
 
 
      .buttons {

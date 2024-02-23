@@ -16,13 +16,12 @@ enum Role {
 }
 
 model User {
-  id  Int @unique
-  username String @unique
-  email String
-  password String
-  role Role @default(USER)
-
-  steamAccount SteamAccountLinkedToUser?
+  id             Int                        @id @default(autoincrement())
+  username       String                     @unique
+  email          String                     @unique
+  password       String
+  role           Role                       @default(USER)
+  steamAccount   SteamAccountLinkedToUser?
 }
 
 model SteamUser {
@@ -34,10 +33,10 @@ model SteamUser {
 }
 
 model SteamAccountLinkedToUser {
-  id Int @id @default(autoincrement())
-  steamId String
-  user User @relation(fields: [userId], references: [id])
-  userId Int @unique
+  id        Int    @id @default(autoincrement())
+  steamId   String @unique
+  user      User   @relation(fields: [userId], references: [id])
+  userId    Int    @unique
 }
 
 

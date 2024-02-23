@@ -3,10 +3,12 @@ import passport from 'passport';
 import session from 'express-session';
 import passportSteam from 'passport-steam';
 import "dotenv/config";
+import { PrismaClient } from '@prisma/client';
 
 const SteamAPI = process.env.Steam_API_Key
 
 const SteamStrategy = passportSteam.Strategy;
+const prisma = new PrismaClient()
 const app = express();
 
 const port = 7069;
@@ -25,11 +27,13 @@ passport.use(new SteamStrategy({
 	returnURL: 'http://localhost:' + port + '/api/auth/steam/return',
 	realm: 'http://localhost:' + port + '/',
 	apiKey: SteamAPI as string 
-	}, function (identifier, profile, done) {
-		process.nextTick(function () {
+	}, async function (identifier, profile, done) {
+		process.nextTick(async function () {
 			console.log("nexTick prosses in server")
 			console.log(identifier)
-			/* profile.identifier = identifier; */
+
+			
+
 			return done(null, profile);
 		});
 	}
