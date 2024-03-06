@@ -12,6 +12,7 @@ export const steamApi = new SteamApi(apiKey as string)
 // Now you can use the API key in your code
 console.log(`API Key: ${apiKey}`);
 
+// fetching SteamLVL: http://api.steampowered.com/IPlayerService/GetSteamLevel/v1/?key=KEYHERE1&steamid=STEAMIDHERE
 
 // Get the news service from the client
 export const newsService = steamApi.getNewsService()
