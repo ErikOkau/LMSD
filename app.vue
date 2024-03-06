@@ -18,6 +18,8 @@
     --light:#fff;
     --black: #000;
     --cyan: #4ca1af;
+    --box2: #202525;
+    --placeholder: #585858;
 }
 
 
