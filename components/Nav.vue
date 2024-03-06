@@ -60,7 +60,7 @@ function loginWithSteam() {
             <img :src="img" alt="light_mode" @click="modeShiftHandler" :data="modeShift">    
 
             <div class="steam_button">
-                <button @click="loginWithSteam">Log in with Steam</button>
+                <button @click="loginWithSteam"><img src="/img/colored_steam_logo.svg"/>Log in with Steam</button>
             </div>
         </div>
       
@@ -139,13 +139,22 @@ nav {
 
         .steam_button {
             button {
-                padding: 0.5rem 1rem;
+                padding: 0.5rem 0rem 0.5rem;
+                padding-right: 1.2rem;
                 border-radius: 10;
                 background-color: var(--cyan);
                 color: var(--darkest);
                 transition: all 0.3s ease-in-out;
                 border: none;
                 color: var(--light);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                img {
+                    width: 20px;
+                    padding-right: 0;
+                }
 
                 &:hover {
                     cursor: pointer;
