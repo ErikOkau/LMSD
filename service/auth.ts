@@ -39,7 +39,7 @@ export const friends = await userService.getFriendList({
 })
 
 // Get the user stats service
-const userStatsService = steamApi.getUserStatsService()
+export const userStatsService = steamApi.getUserStatsService()
 
 // Get Player Achievements
 export const achievements = await userStatsService.getPlayerAchievements({

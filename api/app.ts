@@ -4,8 +4,15 @@ import session from 'express-session';
 import passportSteam from 'passport-steam';
 import "dotenv/config";
 import { PrismaClient, Role } from '@prisma/client';
+import { Issuer, type Client } from 'openid-client';
+import SteamApi, { type IGetNewsForAppParams, type IGetNewsForAppResponse } from '@varandas/steam'
 
-const SteamAPI = process.env.Steam_API_Key
+const apiKey = process.env.Steam_API_Key
+
+const SteamApiFixed = (SteamApi as any).default as typeof SteamApi
+
+const steamOpenIDEndpoint = 'https://steamcommunity.com/openid';
+const steamApi = new SteamApiFixed(apiKey as string)
 
 const SteamStrategy = passportSteam.Strategy;
 const prisma = new PrismaClient()
@@ -27,11 +34,11 @@ passport.deserializeUser((user, done) => {
 passport.use(new SteamStrategy({
 	returnURL: 'http://localhost:' + port + '/api/auth/steam/return',
 	realm: 'http://localhost:' + port + '/',
-	apiKey: SteamAPI as string
+	apiKey: apiKey as string
 }, async function (identifier, profile, done) {
 	process.nextTick(async function () {
 		console.log("nexTick prosses in server")
-		console.log(identifier)
+		console.log("Identifier: " + identifier)
 
 
 		const { steamid, personaname, profileurl, avatar, avatarmedium, avatarfull, avatarhash, lastlogoff, personastate, primaryclanid, timecreated, personastateflags } = profile._json;
@@ -61,6 +68,8 @@ passport.use(new SteamStrategy({
 
 		return done(null, profile);
 	});
+
+	console.log("Profile: " + profile)
 }
 ));
 
@@ -88,15 +97,21 @@ app.listen(port, () => {
 app.get('/', (req, res) => {
 	// Send user data to database here
 	res.send(req.user);
+
+	console.log(req.user)
 });
 
 
 // Routes for authentication
 app.get('/api/auth/steam', passport.authenticate('steam', { failureRedirect: '/' }), function (req, res) {
 	res.redirect('/')
+
+	console.log("/api/auth/steam, req.user: " + req.user)
 });
 app.get('/api/auth/steam/return', passport.authenticate('steam', { failureRedirect: '/' }), function (req, res) {
 	res.redirect('/')
+
+	console.log("/api/auth/steam/return, req.user: " + req.user)
 });
 
 
@@ -109,6 +124,8 @@ app.get('/api/user', (req, res) => {
 		// Send back empty object if not logged in
 		res.json({});
 	}
+
+	console.log("/api/user, req.user: " + req.user)
 });
 
 
@@ -121,7 +138,40 @@ app.get('/api/logout', (req, res) => {
 			res.redirect('/');
 		}
 	});
+
+	console.log('Logged out');
 });
+
+app.get('/api/user/:id', async (req, res) => {
+	const user = await prisma.steamUser.findUnique({
+		where: { steamId: req.params.id },
+	});
+	res.json(user);
+
+	console.log("/api/user/:id, user: " + user)
+});
+
+app.get('/api/steam/level/:id', async (req, res) => {
+	const steamId = req.params.id;
+	const level = fetch(`http://api.steampowered.com/IPlayerService/GetSteamLevel/v1/?key=${apiKey}&steamid=${steamId}`)
+	res.json(level);
+
+	console.log(level)
+});
+
+export const userStatsService = steamApi.getUserStatsService()
+app.get('/api/steam/achievements/:id', async (req, res) => {
+	const steamId = req.params.id;
+	const achievements = await userStatsService.getPlayerAchievements({
+		steamid: steamId,
+		appid: 440,
+	})
+	res.json(achievements);
+
+	console.log("Achievements: " + achievements)
+});
+
+
 
 
 export default {

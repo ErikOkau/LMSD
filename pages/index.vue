@@ -1,8 +1,45 @@
 <script setup lang="ts">
 
-const filterRef = ref({
-    noFilter: 'No filters',
-    Filter: 'Filters: '
+const categories = ref<{
+    username: string;
+    avatar: string;
+    steamLevel: number;
+    achievement: string;
+}[]>([]);
+const searchId = ref('');
+
+
+const searchUser = async (id: string) => {7
+    const response = await fetch(`http://localhost:7069/api/user/${id}`);
+    const user = await response.json();
+
+    const steamLevelResponse = await fetch(`http://localhost:7069/api/steam/level/${id}`);
+    const steamLevel = await steamLevelResponse.json();
+
+    const achievementsResponse = await fetch(`http://localhost:7069/api/steam/achievements/${id}`);
+    const achievements = await achievementsResponse.json();
+    console.log({
+        
+        username: user.username,
+        avatar: user.avatar,
+        steamLevel: steamLevel.level,
+        achievement: achievements.achievement
+    
+    });
+    categories.value = [];
+    categories.value.push({
+        username: user.username,
+        avatar: user.avatar,
+        steamLevel: steamLevel.level,
+        achievement: achievements.achievement
+    })
+};
+
+
+watch(searchId, async (newId, oldId) => {
+  if (newId !== oldId) {
+    await searchUser(newId);
+  }
 });
 
 </script>
@@ -11,7 +48,7 @@ const filterRef = ref({
     <div class="outer_container">
         <div class="search">
             <label for="search">Enter SteamID / Username</label>
-            <input type="text" id="search" name="search" placeholder="Type here ...">
+            <input v-model="searchId" type="text" id="search" name="search" placeholder="Type here ...">
         </div>
         <div class="filters">
             <select class="filter" id="filter" name="filter">
@@ -30,7 +67,7 @@ const filterRef = ref({
                         <th class="achievment">Achievement</th>
                     </tr>
                 </thead>
-                <!-- <tbody>
+                 <tbody>
                     <tr v-for="(category, index) in categories" :key="index">
                         <td>{{ index + 1 }}</td>
                         <td><img :src="category.avatar" alt="Avatar"></td>
@@ -38,7 +75,7 @@ const filterRef = ref({
                         <td>{{ category.steamLevel }}</td>
                         <td>{{ category.achievement }}</td>
                     </tr>
-                </tbody> -->
+                </tbody> 
             </table>
         </div>
     </div>
@@ -86,7 +123,7 @@ const filterRef = ref({
     }
 
     .filters {
-        
+
         .filter {
             margin-top: 1rem;
             padding: 0.5rem;
@@ -127,7 +164,8 @@ const filterRef = ref({
                 opacity: 0.5;
                 color: var(--light);
                 font-size: 0.75rem;
-              
+                padding: 0.5rem;
+
             }
         }
     }
