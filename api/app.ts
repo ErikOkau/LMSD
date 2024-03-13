@@ -4,14 +4,12 @@ import session from 'express-session';
 import passportSteam from 'passport-steam';
 import "dotenv/config";
 import { PrismaClient, Role } from '@prisma/client';
-import { Issuer, type Client } from 'openid-client';
 import SteamApi, { type IGetNewsForAppParams, type IGetNewsForAppResponse } from '@varandas/steam'
 
 const apiKey = process.env.Steam_API_Key
 
+// Workaround for SteamApi module not being able to be imported in Nuxt
 const SteamApiFixed = (SteamApi as any).default as typeof SteamApi
-
-const steamOpenIDEndpoint = 'https://steamcommunity.com/openid';
 const steamApi = new SteamApiFixed(apiKey as string)
 
 const SteamStrategy = passportSteam.Strategy;
@@ -40,9 +38,10 @@ passport.use(new SteamStrategy({
 		console.log("nexTick prosses in server")
 		console.log("Identifier: " + identifier)
 
-
+		// Get user data from Steam
 		const { steamid, personaname, profileurl, avatar, avatarmedium, avatarfull, avatarhash, lastlogoff, personastate, primaryclanid, timecreated, personastateflags } = profile._json;
 
+		// Create user data
 		const userData = {
 			steamId: steamid,
 			username: personaname,
@@ -59,7 +58,7 @@ passport.use(new SteamStrategy({
 			displayName: personaname,
 		};
 
-		// Create or update the user in the database
+		// Create or update user in database
 		const user = await prisma.steamUser.upsert({
 			where: { steamId: steamid },
 			update: userData,
@@ -85,6 +84,7 @@ app.use(session({
 }));
 
 
+// Middleware
 app.use(passport.initialize());
 app.use(passport.session());
 

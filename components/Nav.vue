@@ -50,7 +50,7 @@ function loginWithSteam() {
 <template>
     <nav>
         <div class="left_navbar">
-            <h1 class="logo">Gaming Codex</h1>
+            <NuxtLink to="/"><h1 class="logo">Gaming Codex</h1></NuxtLink>
             <div class="navigation_links">
                 <NuxtLink to="/">Profiles</NuxtLink>
                 <NuxtLink to="/">Leaderboards</NuxtLink>
