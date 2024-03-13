@@ -34,6 +34,7 @@
     "openid-client": "^5.6.4",
     "passport": "^0.7.0",
     "passport-steam": "^1.0.18",
+    "path": "^0.12.7",
     "steam-login": "^0.1.7",
     "steam-session": "^1.7.2",
     "ts-node": "^10.9.2",

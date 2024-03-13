@@ -6,6 +6,7 @@ const categories = ref<{
     steamLevel: number;
     achievement: string;
 }[]>([]);
+
 const searchId = ref('');
 
 

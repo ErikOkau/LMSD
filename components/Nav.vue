@@ -44,6 +44,21 @@ function loginWithSteam() {
         window.open(url, windowName, windowFeatures);
 }
 
+let loggedIn = ref(false);
+let userProfilePicture = ref(''); 
+let username = ref('');
+
+onMounted(() => {
+    fetch('/api/auth/steam/user')
+    .then(response => response.json())
+    .then(data => {
+        if (data.loggedIn) {
+            loggedIn.value = true;
+            userProfilePicture.value = data.profile.photos[2].value;
+            username.value = data.profile.displayName;
+        }
+    })
+})
 
 </script>
 
@@ -59,8 +74,12 @@ function loginWithSteam() {
         <div class="right_navbar">
             <img :src="img" alt="light_mode" @click="modeShiftHandler" :data="modeShift">    
 
-            <div class="steam_button">
+            <div class="steam_button" v-if="!loggedIn">
                 <button @click="loginWithSteam"><img src="/img/colored_steam_logo.svg"/>Log in with Steam</button>
+            </div>
+            <div v-else class="user_profile">
+                <img :src="userProfilePicture" alt="User Profile Picture">
+                <span>{{ username }}</span>
             </div>
         </div>
       

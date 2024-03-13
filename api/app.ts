@@ -120,6 +120,7 @@ app.get('/api/user', (req, res) => {
 	if (req.isAuthenticated()) {
 		// User is logged in so send back data
 		res.json(req.user);
+		res.redirect('/')
 	} else {
 		// Send back empty object if not logged in
 		res.json({});
@@ -127,6 +128,8 @@ app.get('/api/user', (req, res) => {
 
 	console.log("/api/user, req.user: " + req.user)
 });
+
+
 
 
 // Logout route
