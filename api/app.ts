@@ -151,6 +151,7 @@ app.get('/api/user/:id', async (req, res) => {
 	console.log("/api/user/:id, user: " + user)
 });
 
+// Get user's level
 app.get('/api/steam/level/:id', async (req, res) => {
 	const steamId = req.params.id;
 	const level = fetch(`http://api.steampowered.com/IPlayerService/GetSteamLevel/v1/?key=${apiKey}&steamid=${steamId}`)
@@ -159,6 +160,7 @@ app.get('/api/steam/level/:id', async (req, res) => {
 	console.log(level)
 });
 
+// Get user's achievements
 export const userStatsService = steamApi.getUserStatsService()
 app.get('/api/steam/achievements/:id', async (req, res) => {
 	const steamId = req.params.id;
