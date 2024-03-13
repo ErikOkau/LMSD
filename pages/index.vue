@@ -10,7 +10,8 @@ const categories = ref<{
 const searchId = ref('');
 
 
-const searchUser = async (id: string) => {7
+async function searchUser(id: string) {
+    7;
     const response = await fetch(`http://localhost:7069/api/user/${id}`);
     const user = await response.json();
 
@@ -20,12 +21,10 @@ const searchUser = async (id: string) => {7
     const achievementsResponse = await fetch(`/api/steam/achievements/:id`);
     const achievements = await achievementsResponse.json();
     console.log({
-        
         username: user.username,
         avatar: user.avatar,
         steamLevel: steamLevel.level,
         achievement: achievements.achievement
-    
     });
     categories.value = [];
     categories.value.push({
@@ -33,8 +32,8 @@ const searchUser = async (id: string) => {7
         avatar: user.avatar,
         steamLevel: steamLevel.level,
         achievement: achievements.achievement
-    })
-};
+    });
+}
 
 
 watch(searchId, async (newId, oldId) => {
