@@ -109,7 +109,7 @@ app.get('/api/auth/steam', passport.authenticate('steam', { failureRedirect: '/'
 	console.log("/api/auth/steam, req.user: " + req.user)
 });
 app.get('/api/auth/steam/return', passport.authenticate('steam', { failureRedirect: '/' }), function (req, res) {
-	res.redirect('/')
+	res.redirect('http://localhost:3000/')
 
 	console.log("/api/auth/steam/return, req.user: " + req.user)
 });
@@ -173,8 +173,6 @@ app.get('/api/steam/achievements/:id', async (req, res) => {
 
 	console.log("Achievements: " + achievements)
 });
-
-
 
 
 export default {
