@@ -48,24 +48,22 @@ let loggedIn = ref(false);
 let userProfilePicture = ref(''); 
 let username = ref('');
 
-onMounted(() => {
-    fetch('/api/auth/steam/user')
-    .then(response => response.json())
-    .then(data => {
-        if (data.loggedIn) {
-            loggedIn.value = true;
-            userProfilePicture.value = data.profile.photos[2].value;
-            username.value = data.profile.displayName;
-        }
-    })
-})
+onMounted(async () => {
+    const response = await fetch('/api/user');
+    const data = await response.json();
+    if (data.loggedIn) {
+        loggedIn.value = true;
+        userProfilePicture.value = data.profile.photos[2].value;
+        username.value = data.profile.displayName;
+    }
+});
 
 </script>
 
 <template>
     <nav>
         <div class="left_navbar">
-            <NuxtLink to="/"><h1 class="logo">Gaming Codex</h1></NuxtLink>
+            <NuxtLink to="/" class="nuxtLinkLogo"><h1 class="logo">Gaming Codex</h1></NuxtLink>
             <div class="navigation_links">
                 <NuxtLink to="/">Profiles</NuxtLink>
                 <NuxtLink to="/">Leaderboards</NuxtLink>
@@ -122,6 +120,10 @@ nav {
                     background-color: var(--dark);
                 }
             }
+        }
+
+        .nuxtLinkLogo {
+            text-decoration: none;         
         }
 
         .logo {
