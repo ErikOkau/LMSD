@@ -164,7 +164,7 @@ app.get('/api/steam/level/:id', async (req, res) => {
 });
 
 // Get user's achievements
-export const userStatsService = steamApi.getUserStatsService()
+const userStatsService = steamApi.getUserStatsService()
 app.get('/api/steam/achievements/:id', async (req, res) => {
 	const steamId = req.params.id;
 	const achievements = await userStatsService.getPlayerAchievements({
