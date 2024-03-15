@@ -18,7 +18,7 @@ async function searchUser(id: string) {
     const steamLevelResponse = await fetch(`http://localhost:7069/api/steam/level/${id}`);
     const steamLevel = await steamLevelResponse.json();
 
-    const achievementsResponse = await fetch(`/api/steam/achievements/:id`);
+    const achievementsResponse = await fetch(`http://localhost:7069/api/steam/achievements/:id`);
     const achievements = await achievementsResponse.json();
     console.log({
         username: user.username,
