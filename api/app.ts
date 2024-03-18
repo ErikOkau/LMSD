@@ -101,6 +101,19 @@ app.get('/', (req, res) => {
 	console.log(req.user)
 });
 
+// Route to get user data if logged in or not
+app.get('/api/user', (req, res) => {
+	if (req.isAuthenticated()) {
+		// User is logged in so send back data
+		res.json({ loggedIn: true, profile: req.user });
+		res.redirect('/')
+	} else {
+		// Send back empty object if not logged in
+		res.json({ loggedIn: false });
+	}
+
+	console.log("/api/user, req.user: " + req.user)
+}); 
 
 // Routes for authentication
 app.get('/api/auth/steam', passport.authenticate('steam', { failureRedirect: '/' }), function (req, res) {
@@ -113,21 +126,6 @@ app.get('/api/auth/steam/return', passport.authenticate('steam', { failureRedire
 
 	console.log("/api/auth/steam/return, req.user: " + req.user)
 });
-
-
-// Route to get user data if logged in or not
-app.get('/api/user', (req, res) => {
-	if (req.isAuthenticated()) {
-		// User is logged in so send back data
-		res.json(req.user);
-		res.redirect('/')
-	} else {
-		// Send back empty object if not logged in
-		res.json({});
-	}
-
-	console.log("/api/user, req.user: " + req.user)
-}); 
 
 
 // Logout route

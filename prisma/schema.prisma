@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -10,28 +7,26 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-enum Role {
-  ADMIN
-  USER 
+model SteamUser {
+  id                Int      @id @default(autoincrement())
+  steamId           String   @unique
+  profileurl        String
+  avatar            String
+  avatarmedium      String
+  avatarfull        String
+  avatarhash        String
+  lastlogoff        Int
+  personastate      Int
+  primaryclanid     String
+  timecreated       Int
+  personastateflags Int
+  displayName       String
+  role              Role     @default(USER)
+  createdAt         DateTime @default(now())
+  username          String
 }
 
-model SteamUser {
-  id                 Int      @id @default(autoincrement())
-
-  steamId            String   @unique
-  username           String
-  profileurl         String
-  avatar             String
-  avatarmedium       String
-  avatarfull         String
-  avatarhash         String
-  lastlogoff         Int
-  personastate       Int
-  primaryclanid      String
-  timecreated        Int
-  personastateflags  Int
-  displayName        String
-
-  role               Role     @default(USER)
-  createdAt          DateTime @default(now())
+enum Role {
+  ADMIN
+  USER
 }
