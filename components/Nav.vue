@@ -49,7 +49,7 @@ let userProfilePicture = ref('');
 let username = ref('');
 
 onMounted(async () => {
-    const response = await fetch('http://localhost:3000/api/user');
+    const response = await fetch('http://localhost:7069/api/user');
     const data = await response.json();
     if (data.loggedIn) {
         loggedIn.value = true;
