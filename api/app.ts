@@ -172,7 +172,6 @@ app.get('/api/steam/achievements/:id', async (req, res) => {
 	console.log("Achievements: " + achievements)
 });
 
-
 export default {
 	path: '/api',
 	handler: app

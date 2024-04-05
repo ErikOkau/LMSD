@@ -100,7 +100,7 @@ watch(searchId, async (newId, oldId) => {
         align-items: center;
 
         label {
-            color: var(--light);
+            color: white;
             font-size: 1rem;
             margin-bottom: 0.5rem;
         }
@@ -109,7 +109,7 @@ watch(searchId, async (newId, oldId) => {
             width: 15rem;
             border: none;
             padding: 0.5rem;
-            color: var(--light);
+            color: white;
             background-color: var(--box2);
 
             &::placeholder {
@@ -150,7 +150,7 @@ watch(searchId, async (newId, oldId) => {
             border-collapse: collapse;
 
             th {
-                color: var(--light);
+                color: white;
                 font-size: 1rem;
                 padding: 0rem;
                 text-align: left;
