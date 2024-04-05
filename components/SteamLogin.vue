@@ -6,10 +6,6 @@ function loginWithSteam() {
     window.open(url, 'Steam Login', 'width=1000,height=500,scrollbars=yes');
 }
 
-
-function openPopup() {
-
-}
 </script>
 
 <template>
