@@ -122,7 +122,11 @@ app.get('/api/auth/steam', passport.authenticate('steam', { failureRedirect: '/'
 	console.log("/api/auth/steam, req.user: " + req.user)
 });
 app.get('/api/auth/steam/return', passport.authenticate('steam', { failureRedirect: '/' }), function (req, res) {
-	res.send('<script>window.opener.location.href = "http://localhost:3000/"; window.close();</script>');
+
+	if (req.isAuthenticated()) {
+		res.json({ loggedIn: true, profile: req.user });
+		res.send('<script>window.opener.location.href = "http://localhost:3000/"; window.close();</script>');
+	}
 
 	console.log("/api/auth/steam/return, req.user: " + req.user)
 });
